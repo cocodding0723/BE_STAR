@@ -4,11 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Dev_Jiwoong/01. Scene/LoadingUI.unity
-    guid: fe6b58ac668d8034e99e86cd1aaeee48
-  - enabled: 1
-    path: Assets/Dev_Jiwoong/01. Scene/TestScene1.unity
-    guid: 8a852a0976cc6ab478e0922f8d7c3216
+  m_Scenes: []
   m_configObjects: {}
