@@ -1,17 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class InputManager : MonoBehaviour
 {
+    public static InputManager singleton;
     RaycastHit hit;
     float maxDist = 20f;
     public GameObject selectObj;
     Vector3 upPoint;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(singleton == null)
+        {
+            singleton = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     // Update is called once per frame
@@ -29,6 +43,7 @@ public class InputManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, maxDist, LayerMask.GetMask("Triangle")))
             {
                 selectObj = hit.transform.gameObject;
+                TriggerOn(selectObj);
             }
         }
         else if(Input.GetMouseButton(0))
@@ -60,7 +75,15 @@ public class InputManager : MonoBehaviour
             selectObj.transform.Translate(dir * GetForce() * Time.deltaTime);
             yield return null;
         }
-        
+
+        if (selectObj != null)
+        {
+            selectObj.GetComponent<Shapeinteraction>().StopMove();
+            TriggerOff(selectObj);
+            selectObj = null;
+        }
+
+
     }
 
 
@@ -76,6 +99,30 @@ public class InputManager : MonoBehaviour
 
         return dist;
 
+    }
+
+    private void TriggerOn(GameObject g)
+    {
+        if(g != null)
+        {
+            if(g.GetComponent<BoxCollider>())
+            {
+                g.GetComponent<BoxCollider>().isTrigger = true;
+            }
+        }
+        g.GetComponent<ShapeItem>().selectied = true;
+    }
+
+    private void TriggerOff(GameObject g)
+    {
+        if (g != null)
+        {
+            if (g.GetComponent<BoxCollider>())
+            {
+                g.GetComponent<BoxCollider>().isTrigger = false;
+            }
+        }
+        g.GetComponent<ShapeItem>().selectied = false;
     }
 
 
