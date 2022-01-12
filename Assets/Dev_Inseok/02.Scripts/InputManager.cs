@@ -43,7 +43,7 @@ public class InputManager : MonoBehaviour
             if (Physics.Raycast(ray, out hit, maxDist, LayerMask.GetMask("Triangle")))
             {
                 selectObj = hit.transform.gameObject;
-                TriggerOn(selectObj);
+                selectObj.GetComponent<Shapeinteraction>().SelectedObj(true);
             }
         }
         else if(Input.GetMouseButton(0))
@@ -59,71 +59,23 @@ public class InputManager : MonoBehaviour
                 Debug.Log(upPoint);
                 if(selectObj != null && upPoint != null)
                 {
-                    StartCoroutine(MoveSelectObj());
+                    StartCoroutine(selectObj.GetComponent<Shapeinteraction>().MoveSelectObj(upPoint));
                 }
             }
         }
     }
 
-    IEnumerator MoveSelectObj()
+    public void LostSelectObj()
     {
-        float time = 0;
-        while(time < 1)
-        {
-            time += Time.deltaTime;
-            var dir = (selectObj.transform.position - upPoint).normalized;
-            selectObj.transform.Translate(dir * GetForce() * Time.deltaTime);
-            yield return null;
-        }
-
-        if (selectObj != null)
-        {
-            selectObj.GetComponent<Shapeinteraction>().StopMove();
-            TriggerOff(selectObj);
-            selectObj = null;
-        }
-
-
+        selectObj = null;
     }
 
 
 
-    //거리에 따라 힘 가중치
-    private float GetForce()
-    {
-        var dist = Vector3.Distance(selectObj.transform.position, upPoint);
-        if(dist > 5f)
-        {
-            dist = 5;
-        }
+  
+   
 
-        return dist;
 
-    }
-
-    private void TriggerOn(GameObject g)
-    {
-        if(g != null)
-        {
-            if(g.GetComponent<BoxCollider>())
-            {
-                g.GetComponent<BoxCollider>().isTrigger = true;
-            }
-        }
-        g.GetComponent<ShapeItem>().selectied = true;
-    }
-
-    private void TriggerOff(GameObject g)
-    {
-        if (g != null)
-        {
-            if (g.GetComponent<BoxCollider>())
-            {
-                g.GetComponent<BoxCollider>().isTrigger = false;
-            }
-        }
-        g.GetComponent<ShapeItem>().selectied = false;
-    }
 
 
 

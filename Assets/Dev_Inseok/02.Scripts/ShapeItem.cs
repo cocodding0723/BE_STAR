@@ -5,9 +5,9 @@ using UnityEngine;
 public class ShapeItem : MonoBehaviour
 {
 
-    public int shapeScore;
+    public int shapeScore;      //1 »ï°¢ 2 »ç°¢ 3 ¿À°¢ 4 À°°¢ 5 º° 
     public string shapeTag;
-    public bool selectied = false;
+    public bool selectied = false;  // ¼¿·º»óÅÂ
 
 
 
