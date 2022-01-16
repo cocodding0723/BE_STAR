@@ -5,12 +5,12 @@ using UnityEngine;
 [RequireComponent (typeof (ShapeItem))]
 public class Shapeinteraction : MonoBehaviour
 {
-    public GameObject trianglePrefab;   //»ı¼ºÇÒ »ï°¢Çü ÇÁ¸®ÆÕ ³ªÁß¿¡ ¿ÀºêÁ§Æ®Ç®Àû¿ëÇÏ¸é ¾Ë¾Æ¼­ º¯È¯
+    public GameObject trianglePrefab;   //ìƒì„±í•  ì‚¼ê°í˜• í”„ë¦¬íŒ¹ ë‚˜ì¤‘ì— ì˜¤ë¸Œì íŠ¸í’€ì ìš©í•˜ë©´ ì•Œì•„ì„œ ë³€í™˜
 
-    float delay = 2f;   //ÆøÆÈ±îÁö ÅÒ½Ã°£
-    ShapeItem shapeItem;    //µµÇüÁ¤º¸ Å¬·¡½º
+    float delay = 2f;   //í­íŒ”ê¹Œì§€ í…€ì‹œê°„
+    ShapeItem shapeItem;    //ë„í˜•ì •ë³´ í´ë˜ìŠ¤
 
-    public int crashNumber = 0; //´Ù¸¥ µµÇüµé°ú ºÎµúÈù È½¼ö
+    public int crashNumber = 0; //ë‹¤ë¥¸ ë„í˜•ë“¤ê³¼ ë¶€ë”ªíŒ íšŸìˆ˜
 
 
     void Start()
@@ -26,28 +26,28 @@ public class Shapeinteraction : MonoBehaviour
 
 
 
-    void CheckExplosion(int myScore) // È£Ãâ½ÃÁ¡ ³¯¶ó°¡°íÀÖ´ÂÁß ´Ù¸¥µµÇü°ú ºÎµúÇûÀ»¶§
+    void CheckExplosion(int myScore) // í˜¸ì¶œì‹œì  ë‚ ë¼ê°€ê³ ìˆëŠ”ì¤‘ ë‹¤ë¥¸ë„í˜•ê³¼ ë¶€ë”ªí˜”ì„ë•Œ
     {
-        if (myScore >= 5)       //±âº»ÀûÀ¸·Î ´õÇØÁø °ªÀÌ º°ÀÌ µÇ¾î¾ß ÆøÆÈÇÏ±â‹š¹®
+        if (myScore >= 5)       //ê¸°ë³¸ì ìœ¼ë¡œ ë”í•´ì§„ ê°’ì´ ë³„ì´ ë˜ì–´ì•¼ í­íŒ”í•˜ê¸°ë–„ë¬¸
         {
             if (crashNumber == 4)
             {
                 if (myScore == 5)
                 {
-                    //»ï°¢Çü¸¸ 4¹ø ÇÕ¼ºµÇ¾î º°ÀÌ µÊ ÆøÆÈ¸¸ÇÒ°Í
+                    //ì‚¼ê°í˜•ë§Œ 4ë²ˆ í•©ì„±ë˜ì–´ ë³„ì´ ë¨ í­íŒ”ë§Œí• ê²ƒ
                     NormalCase();
                 }
                 else if(myScore > 5)
                 {
-                    PlusScoreCase();// Ãß°¡Á¡¼ö + »ï°¢Çü Ãß°¡»ı¼º
+                    PlusScoreCase();// ì¶”ê°€ì ìˆ˜ + ì‚¼ê°í˜• ì¶”ê°€ìƒì„±
                 }
             }
             else
             {
-                //ÆøÆÈ ÈÄ »ï°¢Çü °¹¼ö ´øÁö±â
+                //í­íŒ” í›„ ì‚¼ê°í˜• ê°¯ìˆ˜ ë˜ì§€ê¸°
                 if (myScore >= 5)      
                 {
-                    PlusScoreCase(); // Ãß°¡Á¡¼ö + »ï°¢Çü Ãß°¡»ı¼º
+                    PlusScoreCase(); // ì¶”ê°€ì ìˆ˜ + ì‚¼ê°í˜• ì¶”ê°€ìƒì„±
                 }
             }
         }
@@ -90,13 +90,13 @@ public class Shapeinteraction : MonoBehaviour
         GameObject g = Instantiate(trianglePrefab);
         g.transform.position = transform.position;
         Debug.Log("create Triangle");
-        //³¯·Áº¸³»±â ·£´ı°ªÀ¸·Î
+        //ë‚ ë ¤ë³´ë‚´ê¸° ëœë¤ê°’ìœ¼ë¡œ
     }
 
 
 
 
-    private void CheckScoreTransformMesh(int myScore)  // µµÇüº¯È¯ ÇÔ¼ö
+    private void CheckScoreTransformMesh(int myScore)  // ë„í˜•ë³€í™˜ í•¨ìˆ˜
     {
         if (myScore < 5)
         {
@@ -130,7 +130,7 @@ public class Shapeinteraction : MonoBehaviour
         }
     }
 
-    public void StopMove()  //¹°¸®¿¡¼­ ¸ØÃß¸é È£Ãâ
+    public void StopMove()  //ë¬¼ë¦¬ì—ì„œ ë©ˆì¶”ë©´ í˜¸ì¶œ
     {
         CheckScoreTransformMesh(shapeItem.shapeScore);
         SelectedObj(false);
@@ -142,15 +142,15 @@ public class Shapeinteraction : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log(other.name);
-        if (other.GetComponent<ShapeItem>()) //ºÎµúÈù°Ô µµÇüÀÎÁö¾Æ´ÑÁö
+        if (other.GetComponent<ShapeItem>()) //ë¶€ë”ªíŒê²Œ ë„í˜•ì¸ì§€ì•„ë‹Œì§€
         {
-            if (GetComponent<ShapeItem>().selectied) // ¼±ÅÃÇØ¼­ ´øÁøµµÇüÀÎ°¡
+            if (GetComponent<ShapeItem>().selectied) // ì„ íƒí•´ì„œ ë˜ì§„ë„í˜•ì¸ê°€
             {
-                crashNumber++;  //ºÎµúÈù È½¼ö +
-                shapeItem.shapeScore += other.GetComponent<ShapeItem>().shapeScore; //½ºÄÚ¾î ºÎµúÈù µµÇüÁ¡¼ö¸¸Å­ ´õÇØÁÜ
-                CheckScoreTransformMesh(shapeItem.shapeScore);  // µµÇüº¯È¯ ÇÔ¼ö
-                CheckExplosion(shapeItem.shapeScore); // ÆøÆÈÃ¼Å©
-                Destroy(other.gameObject); // ºÎµúÈù ¿ÀºêÁ§Æ® ÆÄ±« ¿ÀºêÁ§Æ®Ç® ÇÒ½Ã º¯È¯
+                crashNumber++;  //ë¶€ë”ªíŒ íšŸìˆ˜ +
+                shapeItem.shapeScore += other.GetComponent<ShapeItem>().shapeScore; //ìŠ¤ì½”ì–´ ë¶€ë”ªíŒ ë„í˜•ì ìˆ˜ë§Œí¼ ë”í•´ì¤Œ
+                CheckScoreTransformMesh(shapeItem.shapeScore);  // ë„í˜•ë³€í™˜ í•¨ìˆ˜
+                CheckExplosion(shapeItem.shapeScore); // í­íŒ”ì²´í¬
+                Destroy(other.gameObject); // ë¶€ë”ªíŒ ì˜¤ë¸Œì íŠ¸ íŒŒê´´ ì˜¤ë¸Œì íŠ¸í’€ í• ì‹œ ë³€í™˜
             }
         }
     }
@@ -188,12 +188,9 @@ public class Shapeinteraction : MonoBehaviour
 
         StopMove();
         InputManager.singleton.LostSelectObj();
-
-
-
     }
 
-    //°Å¸®¿¡ µû¶ó Èû °¡ÁßÄ¡
+    //ê±°ë¦¬ì— ë”°ë¼ í˜ ê°€ì¤‘ì¹˜
     private float GetForce(Vector3 upPoint)
     {
         var dist = Vector3.Distance(transform.position, upPoint);
